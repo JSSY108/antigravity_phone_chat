@@ -285,9 +285,29 @@ sudo yum install openssl    # RHEL/CentOS
 
 ---
 
+## 🛡️ Security Audit Log
+
+| Date | Type | Status | Summary |
+|------|------|--------|---------|
+| 2026-02-26 | **Full Sweep** | 🟢 **PASSED** | Hardcoded secrets moved to `.env`. XSS/CDP injection guards verified. |
+
+### Audit Details
+
+- **Secrets Detection**: No sensitive API keys found in codebase. Default passwords and salts externalized to `.env`.
+- **Injection Prevention**: 
+    - ✅ **XSS**: Scraped content is strictly escaped via `escapeHtml` before rendering.
+    - ✅ **CDP**: All interactions (`injectMessage`, `clickElement`) use `JSON.stringify` for safe expression building.
+- **Authentication**: Verified `signedCookie` middleware and `httpOnly` flags.
+- **Access Control**: Validated `isLocalRequest` logic for LAN auto-trust vs Global passcode enforcement.
+- **Dependencies**: All packages verified safe and up-to-date.
+
+---
+
 ## 📚 Related Documentation
 
 - [README.md](README.md) - Quick start and HTTPS setup instructions
 - [CODE_DOCUMENTATION.md](CODE_DOCUMENTATION.md) - Technical details of SSL implementation
 - [DESIGN_PHILOSOPHY.md](DESIGN_PHILOSOPHY.md) - Security design decisions
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Security checklist for contributors
+
+---

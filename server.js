@@ -1457,12 +1457,16 @@ async function createServer() {
 
     const wss = new WebSocketServer({ server });
 
-    // Initialize Auth Token (wait for hashString to be available)
-    AUTH_TOKEN = hashString(APP_PASSWORD + 'antigravity_salt');
+    // Initialize Auth Token using a unique salt from environment
+    const authSalt = process.env.AUTH_SALT || 'antigravity_default_salt_99';
+    AUTH_TOKEN = hashString(APP_PASSWORD + authSalt);
 
     app.use(compression());
     app.use(express.json());
-    app.use(cookieParser('antigravity_secret_key_1337'));
+
+    // Use a secure session secret from .env if available
+    const sessionSecret = process.env.SESSION_SECRET || 'antigravity_secret_key_1337';
+    app.use(cookieParser(sessionSecret));
 
     // Ngrok Bypass Middleware
     app.use((req, res, next) => {
@@ -1867,7 +1871,8 @@ async function createServer() {
         if (isLocalRequest(req)) {
             isAuthenticated = true;
         } else if (signedToken) {
-            const token = cookieParser.signedCookie(signedToken, 'antigravity_secret_key_1337');
+            const sessionSecret = process.env.SESSION_SECRET || 'antigravity_secret_key_1337';
+            const token = cookieParser.signedCookie(signedToken, sessionSecret);
             if (token === AUTH_TOKEN) {
                 isAuthenticated = true;
             }
