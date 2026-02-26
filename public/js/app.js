@@ -771,21 +771,81 @@ async function showChatHistory() {
     const historyLayer = document.getElementById('historyLayer');
     const historyList = document.getElementById('historyList');
 
-    // Temporary: Feature is in development
+    // Show loading state
     historyList.innerHTML = `
-        <div style="padding: 40px 20px; text-align: center; color: white;">
-            <div style="font-size: 24px; margin-bottom: 10px;">🚧</div>
-            <div style="font-weight: 500; margin-bottom: 5px;">History In Development</div>
-            <div style="font-size: 13px; opacity: 0.7;">We are working on improving the history sync. Check back soon!</div>
-            <br>
-            <div class="history-item new-chat-item" onclick="hideChatHistory(); startNewChat();" style="justify-content: center; background: var(--accent); color: white; border:none;">
-                Start New Conversation
-            </div>
+        <div style="padding: 40px 20px; text-align: center; color: white; opacity: 0.7;">
+            <div style="font-size: 24px; margin-bottom: 10px; animation: spin 2s linear infinite;">⏳</div>
+            <div style="font-weight: 500;">Loading Chat History...</div>
+            <style>@keyframes spin { 100% { transform: rotate(360deg); } }</style>
         </div>
     `;
     historyLayer.classList.add('show');
-    setTimeout(() => historyBtn.style.opacity = '1', 300);
+    historyBtn.style.opacity = '1';
+
+    try {
+        const res = await fetchWithAuth('/chat-history');
+        const data = await res.json();
+        
+        if (data.error) {
+            historyList.innerHTML = `
+                <div style="padding: 40px 20px; text-align: center; color: white;">
+                    <div style="font-size: 24px; margin-bottom: 10px;">⚠️</div>
+                    <div style="font-weight: 500; margin-bottom: 5px;">Error loading history</div>
+                    <div style="font-size: 13px; opacity: 0.7;">\${data.error}</div>
+                    <br>
+                    <div class="history-item new-chat-item" onclick="hideChatHistory(); startNewChat();" style="justify-content: center; background: var(--accent); color: white; border:none;">
+                        Start New Conversation
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        const chats = data.chats || [];
+        if (chats.length === 0) {
+            historyList.innerHTML = `
+                <div style="padding: 40px 20px; text-align: center; color: white;">
+                    <div style="font-size: 24px; margin-bottom: 10px;">📝</div>
+                    <div style="font-weight: 500; margin-bottom: 5px;">No recent chats found</div>
+                    <br>
+                    <div class="history-item new-chat-item" onclick="hideChatHistory(); startNewChat();" style="justify-content: center; background: var(--accent); color: white; border:none;">
+                        Start New Conversation
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        // Render chats
+        let html = `
+            <div class="history-item new-chat-item" onclick="hideChatHistory(); startNewChat();" style="justify-content: center; background: var(--accent); color: white; border:none; margin-bottom: 10px;">
+                Start New Conversation
+            </div>
+        `;
+
+        chats.forEach(chat => {
+            const safeTitle = chat.title.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            html += `
+                <div class="history-item" onclick="hideChatHistory(); selectChat('\${safeTitle}');">
+                    <span class="history-item-icon">💬</span>
+                    <span class="history-item-title">\${chat.title}</span>
+                </div>
+            `;
+        });
+        
+        historyList.innerHTML = html;
+
+    } catch (e) {
+        historyList.innerHTML = `
+            <div style="padding: 40px 20px; text-align: center; color: white;">
+                <div style="font-size: 24px; margin-bottom: 10px;">🔌</div>
+                <div style="font-weight: 500; margin-bottom: 5px;">Connection Error</div>
+                <div style="font-size: 13px; opacity: 0.7;">Failed to reach server</div>
+            </div>
+        `;
+    }
 }
+
 
 function hideChatHistory() {
     historyLayer.classList.remove('show');

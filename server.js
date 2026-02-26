@@ -202,7 +202,7 @@ async function connectCDP(url) {
 
 // Capture chat snapshot
 async function captureSnapshot(cdp) {
-    const CAPTURE_SCRIPT = `(() => {
+    const CAPTURE_SCRIPT = \(async () => {`
         const cascade = document.getElementById('conversation') || document.getElementById('chat') || document.getElementById('cascade');
         if (!cascade) {
             // Debug info
@@ -270,6 +270,25 @@ async function captureSnapshot(cdp) {
                 } catch (e) {}
             });
         } catch (globalErr) { }
+
+        // Convert local images to base64
+        const images = clone.querySelectorAll('img');
+        const promises = Array.from(images).map(async (img) => {
+            const rawSrc = img.getAttribute('src');
+            if (rawSrc && (rawSrc.startsWith('/') || rawSrc.startsWith('vscode-file:')) && !rawSrc.startsWith('data:')) {
+                try {
+                    const res = await fetch(rawSrc);
+                    const blob = await res.blob();
+                    await new Promise(r => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => { img.src = reader.result; r(); };
+                        reader.onerror = () => r();
+                        reader.readAsDataURL(blob);
+                    });
+                } catch(e) {}
+            }
+        });
+        await Promise.all(promises);
         
         const html = clone.outerHTML;
         
@@ -304,6 +323,7 @@ async function captureSnapshot(cdp) {
             const result = await cdp.call("Runtime.evaluate", {
                 expression: CAPTURE_SCRIPT,
                 returnByValue: true,
+                awaitPromise: true,
                 contextId: ctx.id
             });
 
