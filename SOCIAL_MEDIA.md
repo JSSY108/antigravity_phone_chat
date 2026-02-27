@@ -1,3 +1,72 @@
+# Social Media Posts for v0.2.28
+
+---
+
+## LinkedIn Post
+
+Your remote AI coding cockpit just got a massive aesthetic upgrade! 💎🚀
+
+I've just released v0.2.28 of Antigravity Phone Connect, and it’s our most beautiful update yet. We’ve moved beyond a simple mirror to a "UI/UX Pro Max" experience.
+
+What's New:
+✨ The Obsidian Overhaul: A deep, "Space Black" palette paired with gorgeous violet-to-indigo gradients. It feels incredibly premium in the hand. 🍷
+✨ Glassmorphism & Micro-animations: Quick-action prompt pills now "float" and glow when you interact with them. 🐚
+✨ One-Tap "Explain": Added a new prompt pill to instantly get detailed, elaborate walk-throughs of any code your AI generates. 🧠
+✨ Security Purity: Completed a full OWASP-scope security audit and published our first formal SECURITY.md audit log. 🛡️
+✨ Flawless Sync: Mobile and Desktop are now perfectly in sync, right down to the history panel dismissals. 🤝
+
+Antigravity Phone Connect remains the ultimate way to stay productive away from your desk.
+
+🔗 Repo: https://github.com/krishnakanthb13/antigravity_phone_chat
+💖 Sponsor: https://krishnakanthb13.github.io/S/PLP.html
+
+---
+
+## Reddit Post
+
+**Suggested Sub-Reddits:** r/programming, r/webdev, r/SideProject, r/opensource, r/design
+**Title:** [Showcase] Antigravity Phone Connect v0.2.28: A "UI/UX Pro Max" Overhaul with Obsidian Themes and Security Audits!
+
+Hey everyone! 👋 
+
+I'm back with v0.2.28 of **Antigravity Phone Connect**, and this one is all about **Aesthetics and Pro Features**. 📱💎
+
+If you haven't seen it, this is an open-source tool that mirrors your desktop AI coding assistant (like Antigravity) to your phone so you can monitor those long "thinking" sessions while grabbing a coffee.
+
+**The "UI/UX Pro Max" Highlights:**
+
+🍷 **Obsidian & Violet**: We shifted to a high-contrast "Obsidian" theme with gorgeous violet accent gradients. It looks and feels like a professional mobile companion app.
+    
+🐚 **Glassmorphism**: The prompt controls (Continue, Explain, Fix Bugs) now use beautiful glassmorphism effects with blurred backdrops and interactive glows. The buttons actually "float" on your screen.
+
+🧠 **New "Explain" Action**: I added a one-tap action for the "Bathroom Use Case"—when you just want the AI to walk you through its logic without typing a single word on your phone.
+
+🤝 **Perfect Sync**: Closing the history view on mobile now instantly closes the desktop popup via a remote CDP "Escape" relay. No leftover UI clutter!
+
+🛡️ **Security Audit**: We performed a formal security sweep and added a persistent `SECURITY.md` report.
+
+Antigravity Phone Connect is built with Node.js, Python, and Chrome DevTools Protocol. Check out the new look on GitHub!
+
+🔗 **Repo**: https://github.com/krishnakanthb13/antigravity_phone_chat
+💖 **Sponsor**: https://krishnakanthb13.github.io/S/PLP.html
+
+---
+
+## X (Twitter) Post
+
+Antigravity Phone Connect v0.2.28 is out and it's STUNNING. 📱💎
+
+We've moved to a "UI/UX Pro Max" aesthetic with the Obsidian Overhaul.
+
+✅ Deep Space backgrounds & Violet gradients 🍷
+✅ New 1-tap "Explain" feature 🧠
+✅ Full OWASP Security Audit 🛡️
+
+🔗 Repo: https://github.com/krishnakanthb13/antigravity_phone_chat
+💖 Support: https://krishnakanthb13.github.io/S/PLP.html
+
+---
+
 # Social Media Posts for v0.2.24
 
 ---

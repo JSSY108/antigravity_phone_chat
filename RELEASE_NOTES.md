@@ -4,6 +4,32 @@ All notable changes to **Antigravity Phone Connect** are documented here, in rev
 
 ---
 
+## v0.2.28 - UI/UX Pro Max & The Obsidian Overhaul 💎
+**Release Date:** February 27, 2026
+
+---
+
+### ✨ The "Obsidian" Visual Overhaul
+- **Aesthetic Excellence**: Completely reimagined the mobile interface with a deep, "Space Black" palette and gorgeous violet-to-indigo gradients. It's our most premium-feeling update yet.
+- **Glassmorphic Prompt Area**: Refined the quick-action pills (Continue, Explain, Fix Bugs) with elegant glassmorphism effects and micro-animations. Pills now "float" and glow with subtle violet shadows when interacted with.
+- **Symmetric Controls**: Re-styled the History button to match the minimalist, icon-only design of the Refresh button for a cleaner, unified header aesthetic.
+
+### 🚀 New Features & Deep Sync
+- **Explain Pill**: Added a dedicated "Explain" quick-action pill for one-tap, detailed code breakdowns.
+- **Dynamic Glows**: Interactive elements now emit a soft indigo/violet glow, matching the theme's core accent for better visual feedback.
+- **Perfect Sync (v0.2.26)**: Dismissing the mobile history layer now automatically triggers a remote "Escape" sequence to close the desktop history panel instantly.
+- **Premium History Cards (v0.2.25)**: Completely redesigned the history view with elevated, interactive cards and smooth transitions.
+
+### 🛡️ Security & Auditing
+- **OWASP Security Audit**: Performed a "Paranoid Mode" security sweep across the entire codebase.
+- **Audit Logging**: Updated `SECURITY.md` with detailed findings on secrets management, injection prevention, and authentication protocols.
+- **Verified Protection**: Confirmed that the CDP injection layer remains strictly scoped and secure against XSS.
+
+### 📚 Documentation
+- **Technical Sync**: Updated `CODE_DOCUMENTATION.md` and `DESIGN_PHILOSOPHY.md` to reflect the new visual architecture and human-centric design choices.
+
+---
+
 ## v0.2.24 - Deterministic Targeting & Security Hardening 🎯
 **Release Date:** February 26, 2026
 
