@@ -4,6 +4,19 @@ All notable changes to **Antigravity Phone Connect** are documented here, in rev
 
 ---
 
+## v0.2.29 - Conversation Switching Reliability 🔄
+**Release Date:** March 11, 2026
+
+---
+
+### 🚀 Improved Conversation Switching
+- **Robust Selectors:** Completely rewrote the `selectChat` CDP logic in the backend to use fallback mouse events, scored fuzzy matching, and robust wait-for-visible polling for the Antigravity History panel.
+- **UI Feedback:** The mobile interface now displays a "Switching Conversation..." loading state instead of freezing when a new chat is selected from history.
+- **Persistent Polling:** The frontend now automatically polls for updates after a chat switch is requested, ensuring the mobile view stays perfectly in sync once the desktop client updates.
+- **Server Cache Invalidation:** Handled cache synchronization to guarantee fresh chat history loads.
+
+---
+
 ## v0.2.28 - UI/UX Pro Max & The Obsidian Overhaul 💎
 **Release Date:** February 27, 2026
 
