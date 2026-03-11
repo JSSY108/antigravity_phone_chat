@@ -28,6 +28,7 @@ netstat -ano | findstr :9000
 
 echo [STARTING] Launching via Unified Launcher...
 echo [DEBUG] Starting Antigravity with Remote Debugging on port 9000...
+set PYTHONIOENCODING=utf-8
 python launcher.py --mode local
 
 :: Keep window open if server crashes

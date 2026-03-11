@@ -68,6 +68,7 @@ netstat -ano | findstr :9000
 echo [1/1] Launching Antigravity Phone Connect...
 echo (This will start both the server and the web tunnel)
 echo [DEBUG] Starting Antigravity with Remote Debugging on port 9000...
+set PYTHONIOENCODING=utf-8
 python launcher.py --mode web
 
 :: 6. Auto-close when done

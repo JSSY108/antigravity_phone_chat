@@ -228,6 +228,18 @@ def main():
         # Keep alive loop
         last_log_pos = 0
         cdp_warning_shown = False
+
+        # Run the debug check once the banner is up
+        print("\n[DEBUG] Checking if port 9000 is available for Antigravity Remote Debugging...")
+        try:
+            if sys.platform == "win32":
+                os.system("netstat -ano | findstr :9000")
+            else:
+                os.system("lsof -i :9000")
+        except:
+            pass
+        print("[DEBUG] Antigravity must be started with: --remote-debugging-port=9000\n")
+        
         
         while True:
             time.sleep(1)
