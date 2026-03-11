@@ -21,7 +21,13 @@ echo   Antigravity Phone Connect Launcher
 echo ===================================================
 echo.
 
+echo [INFO] .env configuration found.
+
+echo [DEBUG] Checking if port 9000 is available for Antigravity Remote Debugging...
+netstat -ano | findstr :9000
+
 echo [STARTING] Launching via Unified Launcher...
+echo [DEBUG] Starting Antigravity with Remote Debugging on port 9000...
 python launcher.py --mode local
 
 :: Keep window open if server crashes

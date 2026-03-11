@@ -61,10 +61,18 @@ if exist ".env.example" (
 :ENV_FOUND
 echo [INFO] .env configuration found.
 
+echo [DEBUG] Checking if port 9000 is available for Antigravity Remote Debugging...
+netstat -ano | findstr :9000
+
 :: 5. Launch everything via Python
 echo [1/1] Launching Antigravity Phone Connect...
 echo (This will start both the server and the web tunnel)
+echo [DEBUG] Starting Antigravity with Remote Debugging on port 9000...
 python launcher.py --mode web
 
 :: 6. Auto-close when done
+:: Keep window open if server crashes
+echo.
+echo [INFO] Server stopped. Press any key to exit.
+pause >nul
 exit
