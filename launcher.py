@@ -232,11 +232,20 @@ def main():
         # Run the debug check once the banner is up
         print("\n[DEBUG] Checking if port 9000 is available for Antigravity Remote Debugging...")
         try:
+            listening = False
             if sys.platform == "win32":
-                os.system("netstat -ano | findstr :9000")
+                output = subprocess.check_output("netstat -ano | findstr :9000", shell=True).decode()
+                if "LISTENING" in output: listening = True
             else:
-                os.system("lsof -i :9000")
+                output = subprocess.check_output("lsof -i :9000", shell=True).decode()
+                if "LISTEN" in output: listening = True
+                
+            if listening:
+                print("✅ Found Antigravity debugging port (9000) actively listening.")
+            else:
+                print("❌ WARNING: Port 9000 is NOT listening. Antigravity may not be running in debug mode.")
         except:
+            print("❌ WARNING: Port 9000 is NOT listening. Antigravity may not be running in debug mode.")
             pass
         print("[DEBUG] Antigravity must be started with: --remote-debugging-port=9000\n")
         
