@@ -65,36 +65,58 @@ The script will:
 
 ---
 
-## 🌍 Network & Remote Access: Cloudflare Tunnel
+## 🌍 Global Remote Access (Web Mode)
 
-**Antigravity Phone Connect** now supports **Cloudflare Tunnels** as the primary, high-bandwidth alternative to ngrok. Cloudflare provides more stable connections and is completely free without the bandwidth limitations often encountered with ngrok.
+Access your Antigravity session from **anywhere in the world** (Mobile Data, outside Wi-Fi) with secure passcode protection.
 
-### ⚡ Two Modes of Operation
+### ⚡ Option 1: Cloudflare Tunnel (Recommended)
+**Antigravity Phone Connect** now supports **Cloudflare Tunnels**.
+- **Pros**: High bandwidth, stable connection, professional permanent URL.
+- **Cons**: Requires owning a custom domain (cost) and a one-time manual setup for permanent tunnels.
 
-1.  **Zero-Config (Quick Tunnel)**: If you don't provide a domain, the launcher automatically creates a temporary `trycloudflare.com` URL for you. Perfect for quick testing!
-2.  **Named Tunnel (Custom Domain)**: Provides a permanent, branded URL (e.g., `phone.yourdomain.com`).
+#### 1. Zero-Config (Quick Tunnel)
+Simply run any launcher script. They will automatically detect, download, and configure a temporary `trycloudflare.com` URL for you. No accounts needed!
 
-### 🛠️ Manual Setup Guide (Custom Domain)
-
-For users who want a permanent branded link, follow these steps:
+#### 2. Named Tunnel (Custom Domain) - 6 Step Setup
+Provides a permanent, branded URL (e.g., `phone.yourdomain.com`). Follow these steps for manual setup:
 
 1.  **Installation**: Download `cloudflared` from the [official releases](https://github.com/cloudflare/cloudflared/releases) and add it to your system PATH or your project root.
 2.  **Authentication**: Run `cloudflared tunnel login` in your terminal to link your account.
-3.  **Creation**: Create your tunnel by running `cloudflared tunnel create [name]`.
-4.  **DNS Routing**: Route your domain to the tunnel: `cloudflared tunnel route dns [name] [yourdomain.com]`.
+3.  **Creation**: Create your tunnel: `cloudflared tunnel create [name]`.
+4.  **DNS Routing**: Route your domain: `cloudflared tunnel route dns [name] [yourdomain.com]`.
 5.  **Nameservers**: Ensure your domain registrar (e.g., Namecheap, GoDaddy) is pointing to Cloudflare's nameservers.
-6.  **Environment**: Update your `.env` file with your tunnel details:
+6.  **Environment**: Update your `.env` with your tunnel details:
     ```bash
     TUNNEL_DOMAIN=yourdomain.com
     TUNNEL_NAME=your-tunnel-name
     ```
 
-### 🔄 The Fallback System
+### ⚡ Option 2: ngrok (Fallback)
+If you prefer ngrok, sign up for free at [ngrok.com](https://ngrok.com). 
+- **Pros**: Extremely easy setup (only requires an Authtoken).
+- **Cons**: Limited bandwidth on the free tier (can be slower for video-heavy state mirroring).
 
-The `launcher.py` is equipped with a **Smart Connectivity** layer:
-- **Priority 1**: Tries your **Custom Cloudflare Tunnel** if configured.
-- **Priority 2**: Falls back to **ngrok** if a token is present.
-- **Priority 3 (Instant)**: Automatically launches a **Cloudflare Quick Tunnel** if no other configuration is detected.
+```bash
+NGROK_AUTHTOKEN=your_token_here
+```
+
+### 🔄 The Smart Fallback System
+The `launcher.py` is equipped with a tiered connectivity layer:
+- **Priority 1**: Tries your **Custom Cloudflare Tunnel** (if `TUNNEL_DOMAIN` is set).
+- **Priority 2**: Falls back to **ngrok** (if `NGROK_AUTHTOKEN` is set).
+- **Priority 3 (Instant)**: If both are absent or fail, it automatically launches a **Cloudflare Quick Tunnel** to ensure you stay connected.
+
+### 🚀 Usage
+- **Windows**: Run `start_ag_phone_connect_web.bat`
+- **Mac/Linux**: Run `./start_ag_phone_connect_web.sh`
+
+**Two Ways to Connect:**
+1. **Magic Link (Easiest)**: Scan the **Magic QR Code** displayed in the terminal. It logs you in automatically!
+2. **Manual**: Open the URL on your phone and enter your `APP_PASSWORD`.
+
+> 💡 **Tip:** Devices on the same local Wi-Fi still enjoy direct access without needing a password.
+
+---
 
 ---
 
