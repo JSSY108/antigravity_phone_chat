@@ -35,3 +35,7 @@ certs/
 
 # Registry
 registry/
+
+# Cloudflare
+cloudflared
+cloudflared.exe
