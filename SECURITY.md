@@ -24,8 +24,9 @@
 
 ## 🟢 4. Dependency Analysis
 **Status: Passed**
-- **Observation:** Core dependencies (`express`, `ws`, `cookie-parser`, `dotenv`) are cleanly defined without bloated sub-dependencies.
-- **Finding:** No immediate critical supply chain vulnerabilities observed.
+- **Observation:** Core dependencies (`express`, `ws`, `cookie-parser`, `dotenv`) are cleanly defined.
+- **Finding:** The addition of `cloudflared` (Cloudflare) provides a secure, token-less tunneling option. The launcher script verifies binary integrity by downloading directly from official GitHub releases.
+- **Note:** Cloudflare Quick Tunnels do not require an account, further isolating your session from external identity providers. Unlike ngrok, which requires a persistent authtoken for stable connections, Cloudflare allows for completely anonymous, high-bandwidth tunnels.
 
 ---
-**Conclusion:** The repository is in strong standing. The underlying architecture explicitly proxies to a sandboxed desktop DOM environment, dramatically reducing server-side execution risks.
+**Conclusion:** The repository is in strong standing. The underlying architecture explicitly proxies to a sandboxed desktop DOM environment, dramatically reducing server-side execution risks. The introduction of Cloudflare support enhances user privacy and connection reliability.

@@ -39,3 +39,4 @@ registry/
 # Cloudflare
 cloudflared
 cloudflared.exe
+config.yml

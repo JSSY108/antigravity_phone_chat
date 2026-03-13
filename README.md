@@ -65,39 +65,36 @@ The script will:
 
 ---
 
-## 🌍 NEW: Global Remote Access (Web Mode)
+## 🌍 Network & Remote Access: Cloudflare Tunnel
 
-Access your Antigravity session from **anywhere in the world** (Mobile Data, outside Wi-Fi) with secure passcode protection.
+**Antigravity Phone Connect** now supports **Cloudflare Tunnels** as the primary, high-bandwidth alternative to ngrok. Cloudflare provides more stable connections and is completely free without the bandwidth limitations often encountered with ngrok.
 
-### Setup (First Time)
-1. **Get an ngrok Token**: Sign up for free at [ngrok.com](https://ngrok.com) and get your "Authtoken".
-2. **Automatic Configuration (Recommended)**: Simply run any launcher script. They will detect if `.env` is missing and automatically create it using `.env.example` as a template.
-3. **Manual Setup**: Alternatively, copy `.env.example` to `.env` manually and update the values:
-   ```bash
-   copy .env.example .env   # Windows
-   cp .env.example .env     # Mac/Linux
-   ```
-   Update the `.env` file with your details:
-   ```env
-   NGROK_AUTHTOKEN=your_token_here
-   APP_PASSWORD=your_secure_passcode
-   XXX_API_KEY=your-ai-provider-key
-   PORT=3000
-   ```
+### ⚡ Two Modes of Operation
 
-### Usage
-- **Windows**: Run `start_ag_phone_connect_web.bat`
-- **Mac/Linux**: Run `./start_ag_phone_connect_web.sh`
+1.  **Zero-Config (Quick Tunnel)**: If you don't provide a domain, the launcher automatically creates a temporary `trycloudflare.com` URL for you. Perfect for quick testing!
+2.  **Named Tunnel (Custom Domain)**: Provides a permanent, branded URL (e.g., `phone.yourdomain.com`).
 
-The script will launch the server and provide a **Public URL** (e.g., `https://abcd-123.ngrok-free.app`). 
+### 🛠️ Manual Setup Guide (Custom Domain)
 
-**Two Ways to Connect:**
-1. **Magic Link (Easiest)**: Scan the **Magic QR Code** displayed in the terminal. It logs you in automatically!
-2. **Manual**: 
-   - Open the URL on your phone.
-   - Enter your `APP_PASSWORD` to log in.
+For users who want a permanent branded link, follow these steps:
 
-> 💡 **Tip:** Devices on the same local Wi-Fi still enjoy direct access without needing a password.
+1.  **Installation**: Download `cloudflared` from the [official releases](https://github.com/cloudflare/cloudflared/releases) and add it to your system PATH or your project root.
+2.  **Authentication**: Run `cloudflared tunnel login` in your terminal to link your account.
+3.  **Creation**: Create your tunnel by running `cloudflared tunnel create [name]`.
+4.  **DNS Routing**: Route your domain to the tunnel: `cloudflared tunnel route dns [name] [yourdomain.com]`.
+5.  **Nameservers**: Ensure your domain registrar (e.g., Namecheap, GoDaddy) is pointing to Cloudflare's nameservers.
+6.  **Environment**: Update your `.env` file with your tunnel details:
+    ```bash
+    TUNNEL_DOMAIN=yourdomain.com
+    TUNNEL_NAME=your-tunnel-name
+    ```
+
+### 🔄 The Fallback System
+
+The `launcher.py` is equipped with a **Smart Connectivity** layer:
+- **Priority 1**: Tries your **Custom Cloudflare Tunnel** if configured.
+- **Priority 2**: Falls back to **ngrok** if a token is present.
+- **Priority 3 (Instant)**: Automatically launches a **Cloudflare Quick Tunnel** if no other configuration is detected.
 
 ---
 
