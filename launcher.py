@@ -1,5 +1,15 @@
 import sys
 import typing
+
+# Ensure UTF-8 output even on Windows terminals that default to cp1252
+if sys.platform == "win32":
+    try:
+        import codecs
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except (AttributeError, ImportError):
+        pass
+
 import subprocess
 import time
 import random
